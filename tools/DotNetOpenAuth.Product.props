@@ -139,10 +139,6 @@ http://opensource.org/licenses/ms-pl.html
 		</Reference>
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(ClrVersion)' == '4' ">
-		<Reference Include="System.Xaml" />
-		<Reference Include="System.Net.Http" />
-	</ItemGroup>
 	<ItemGroup Condition=" '$(ClrVersion)' != '4' ">
 		<Reference Include="System.Web.Mobile" />
 		<Reference Include="PresentationFramework">

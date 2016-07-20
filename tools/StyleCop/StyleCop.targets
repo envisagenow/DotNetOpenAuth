@@ -36,7 +36,7 @@
     <StyleCopEnabled>$(SourceAnalysisEnabled)</StyleCopEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(StyleCopEnabled)' == ''">
-    <StyleCopEnabled>true</StyleCopEnabled>
+    <StyleCopEnabled>false</StyleCopEnabled>
   </PropertyGroup>
 
   <!-- Define StyleCopOverrideSettingsFile property. -->
