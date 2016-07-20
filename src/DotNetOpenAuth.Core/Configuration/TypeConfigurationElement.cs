@@ -12,11 +12,7 @@ namespace DotNetOpenAuth.Configuration {
 	using System.IO;
 	using System.Reflection;
 	using System.Web;
-#if CLR4
 	using System.Xaml;
-#else
-	using System.Windows.Markup;
-#endif
 	using DotNetOpenAuth.Messaging;
 
 	/// <summary>
@@ -133,11 +129,7 @@ namespace DotNetOpenAuth.Configuration {
 		/// </remarks>
 		private static T CreateInstanceFromXaml(Stream xaml) {
 			Contract.Ensures(Contract.Result<T>() != null);
-#if CLR4
 			return (T)XamlServices.Load(xaml);
-#else
-			return (T)XamlReader.Load(xaml);
-#endif
 		}
 	}
 }

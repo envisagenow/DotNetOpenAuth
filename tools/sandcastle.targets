@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTarget="Build">
+	<UsingTask AssemblyFile="..\lib\DotNetOpenAuth.BuildTasks.dll" TaskName="SetEnvironmentVariable" />
 	<PropertyGroup>
 		<PresentationStyle Condition="'$(PresentationStyle)' == ''">vs2005</PresentationStyle>
 		<!-- Environment -->
 		<ProjectRoot Condition="'$(ProjectRoot)' == ''">$(MSBuildProjectDirectory)\..\..\</ProjectRoot>
-		<Framework>$(WINDIR)\Microsoft.NET\Framework\v2.0.50727</Framework>
+		<Framework>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319</Framework>
 		<DxRoot>$(ProjectRoot)tools\Sandcastle\</DxRoot>
 		<ProductionTools>$(DxRoot)ProductionTools\</ProductionTools>
 		<ProductionTransforms>$(DxRoot)ProductionTransforms\</ProductionTransforms>
 		<Presentation>$(DxRoot)Presentation\$(PresentationStyle)\</Presentation>
 		<HHC>$(PROGRAMFILES)\Html Help Workshop\hhc.exe</HHC>
-
-		<OutputAssemblyFile Condition=" '$(OutputAssemblyFile)' == '' ">$(OutputPath)$(OutputAssembly).dll</OutputAssemblyFile>
 
 		<DocOutputApiPath>$(DocOutputPath)api\</DocOutputApiPath>
 		<DocIntermediatePath>$(ProjectRoot)obj\Doc\$(Configuration)\</DocIntermediatePath>
@@ -34,7 +33,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<AssemblyFolders Include="$(WINDIR)\Microsoft.NET\Framework\v2.0.50727\*.dll"/>
+		<AssemblyFolders Include="$(WINDIR)\Microsoft.NET\Framework\v2.0.50727\*.dll" Condition="$(NetfxVer)&lt;4.0"/>
 		<AssemblyFolders Include="$(WINDIR)\Microsoft.NET\Framework\v3.0\**\*.dll" Condition="$(NetfxVer)>2.0"/>
 		<AssemblyFolders Include="$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\v3.0\*.dll" Condition="$(NetfxVer)>2.0"/>
 		<AssemblyFolders Include="$(WINDIR)\Microsoft.NET\Framework\v3.5\**\*.dll" Condition="$(NetfxVer)>3.0"/>
@@ -117,15 +116,21 @@
 		<MakeDir Directories="$(DocOutputApiPath)html;$(DocOutputApiPath)media;$(DocOutputApiPath)intellisense"/>
 	</Target>
 
-	<Target Name="ReflectionBase" Inputs="$(OutputAssemblyFile)" Outputs="$(ReflectionBaseFile)"
-					DependsOnTargets="SetEnvironmentVars;CreateIntermediatePath;ProductionTools">
+	<Target Name="CollectMRefDependencies" />
+
+	<Target Name="ReflectionBase" Inputs="@(OutputAssemblyFiles)" Outputs="$(ReflectionBaseFile)"
+					DependsOnTargets="CollectMRefDependencies;SetEnvironmentVars;CreateIntermediatePath;ProductionTools">
+		<RemoveDuplicates Inputs="@(MRefDependencies)">
+			<Output TaskParameter="Filtered" ItemName="UniqueMRefDependencies"/>
+		</RemoveDuplicates>
 		<ItemGroup>
-			<MRefDependenciesSwitch Include="@(MRefDependencies->'/dep:&quot;%(Identity)&quot;')" />
+			<MRefDependenciesSwitch Include="@(UniqueMRefDependencies->'/dep:&quot;%(Identity)&quot;')" />
+			<_OutputAssemblyFilesWithQuotes Include='"%(OutputAssemblyFiles.Identity)"' />
 		</ItemGroup>
 		<PropertyGroup>
 			<MRefDependenciesSwitch>@(MRefDependenciesSwitch,' ')</MRefDependenciesSwitch>
 		</PropertyGroup>
-		<Exec Command='"$(ProductionTools)MRefBuilder.exe" "$(OutputAssemblyFile)" /out:"$(ReflectionBaseFile)" $(MRefDependenciesSwitch)' />
+		<Exec Command='"$(ProductionTools)MRefBuilder.exe" @(_OutputAssemblyFilesWithQuotes, &apos; &apos;) /out:"$(ReflectionBaseFile)" $(MRefDependenciesSwitch)' />
 	</Target>
 
 	<Target Name="ReflectionData" DependsOnTargets="FxReflection;ReflectionBase" Inputs="$(ReflectionBaseFile)" Outputs="$(ReflectionFile)">

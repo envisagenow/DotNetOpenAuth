@@ -11,9 +11,7 @@ namespace DotNetOpenAuth.OAuth {
 	using System.Diagnostics.Contracts;
 	using System.Linq;
 	using System.Net;
-#if CLR4
 	using System.Net.Http;
-#endif
 	using DotNetOpenAuth.Configuration;
 	using DotNetOpenAuth.Messaging;
 	using DotNetOpenAuth.Messaging.Bindings;
@@ -106,7 +104,6 @@ namespace DotNetOpenAuth.OAuth {
 			return grantAccess.AccessToken;
 		}
 
-#if CLR4
 
 		/// <summary>
 		/// Creates an HTTP handler that automatically applies an OAuth 1 access token and signature to outbound HTTP requests.
@@ -124,8 +121,6 @@ namespace DotNetOpenAuth.OAuth {
 				AccessTokenSecret = this.TokenManager.GetTokenSecret(accessToken),
 			};
 		}
-
-#endif
 
 		/// <summary>
 		/// Creates a web request prepared with OAuth authorization 

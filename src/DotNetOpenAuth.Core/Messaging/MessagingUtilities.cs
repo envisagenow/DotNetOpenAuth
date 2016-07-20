@@ -15,9 +15,7 @@ namespace DotNetOpenAuth.Messaging {
 	using System.IO.Compression;
 	using System.Linq;
 	using System.Net;
-#if CLR4
 	using System.Net.Http;
-#endif
 	using System.Net.Mime;
 	using System.Runtime.Serialization.Json;
 	using System.Security;
@@ -167,7 +165,6 @@ namespace DotNetOpenAuth.Messaging {
 			return new OutgoingWebResponseActionResult(response);
 		}
 
-#if CLR4
 		/// <summary>
 		/// Transforms an OutgoingWebResponse to a Web API-friendly HttpResponseMessage.
 		/// </summary>
@@ -188,7 +185,6 @@ namespace DotNetOpenAuth.Messaging {
 
 			return response;
 		}
-#endif
 
 		/// <summary>
 		/// Gets the original request URL, as seen from the browser before any URL rewrites on the server if any.
@@ -457,11 +453,7 @@ namespace DotNetOpenAuth.Messaging {
 			return new XmlReaderSettings {
 				MaxCharactersFromEntities = 1024,
 				XmlResolver = null,
-#if CLR4
 				DtdProcessing = DtdProcessing.Prohibit,
-#else
-				ProhibitDtd = true,
-#endif
 			};
 		}
 

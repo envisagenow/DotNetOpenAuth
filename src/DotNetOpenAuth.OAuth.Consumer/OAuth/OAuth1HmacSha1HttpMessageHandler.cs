@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if CLR4
-
 namespace DotNetOpenAuth.OAuth {
 	using System;
 	using System.Collections.Generic;
@@ -59,5 +57,3 @@ namespace DotNetOpenAuth.OAuth {
 		}
 	}
 }
-
-#endif
