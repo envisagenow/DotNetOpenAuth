@@ -117,9 +117,6 @@ http://opensource.org/licenses/ms-pl.html
 			<RequiredTargetFramework>3.5</RequiredTargetFramework>
 		</Reference>
 		<Reference Include="System.Web" />
-		<Reference Include="System.Web.Abstractions">
-			<RequiredTargetFramework>3.5</RequiredTargetFramework>
-		</Reference>
 		<Reference Include="System.Web.Extensions">
 			<RequiredTargetFramework>3.5</RequiredTargetFramework>
 		</Reference>
@@ -136,18 +133,6 @@ http://opensource.org/licenses/ms-pl.html
 		</Reference>
 		<Reference Include="System.ComponentModel.DataAnnotations">
 			<RequiredTargetFramework>3.5</RequiredTargetFramework>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(ClrVersion)' != '4' ">
-		<Reference Include="System.Web.Mobile" />
-		<Reference Include="PresentationFramework">
-			<!-- For XamlReader, but we use System.Xaml.dll in .NET 4.0 -->
-			<RequiredTargetFramework>3.0</RequiredTargetFramework>
-		</Reference>
-		<Reference Include="WindowsBase">
-			<!-- ObservableCollection<T>, moved to System.dll in .NET 4.0 -->
-			<RequiredTargetFramework>3.0</RequiredTargetFramework>
 		</Reference>
 	</ItemGroup>
 </Project>
