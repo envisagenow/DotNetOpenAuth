@@ -7,16 +7,10 @@
 namespace DotNetOpenAuth.Messaging {
 	using System;
 	using System.Collections.Specialized;
-	using System.Diagnostics;
-	using System.Diagnostics.CodeAnalysis;
-	using System.Diagnostics.Contracts;
-	using System.Globalization;
 	using System.IO;
 	using System.Net;
-#if CLR4
 	using System.Net.Http;
 	using System.Net.Http.Headers;
-#endif
 	using System.Net.Mime;
 	using System.ServiceModel.Channels;
 	using System.Web;

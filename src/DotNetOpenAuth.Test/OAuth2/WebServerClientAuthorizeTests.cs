@@ -16,6 +16,7 @@ namespace DotNetOpenAuth.Test.OAuth2 {
 	using DotNetOpenAuth.OAuth2;
 	using DotNetOpenAuth.OAuth2.ChannelElements;
 	using DotNetOpenAuth.OAuth2.Messages;
+	using DotNetOpenAuth.Test.Mocks;
 	using Moq;
 	using NUnit.Framework;
 
@@ -136,7 +137,7 @@ namespace DotNetOpenAuth.Test.OAuth2 {
 			var tcs = new TaskCompletionSource<HttpResponseMessage>();
 			var expectedResponse = new HttpResponseMessage();
 
-			var mockHandler = new Mocks.MockHttpMessageHandler((req, ct) => {
+			var mockHandler = new MockHttpMessageHandler((req, ct) => {
 				Assert.That(req.Headers.Authorization.Scheme, Is.EqualTo(Protocol.BearerHttpAuthorizationScheme));
 				Assert.That(req.Headers.Authorization.Parameter, Is.EqualTo(bearerToken));
 				tcs.SetResult(expectedResponse);
@@ -157,7 +158,7 @@ namespace DotNetOpenAuth.Test.OAuth2 {
 			var tcs = new TaskCompletionSource<HttpResponseMessage>();
 			var expectedResponse = new HttpResponseMessage();
 
-			var mockHandler = new Mocks.MockHttpMessageHandler((req, ct) => {
+			var mockHandler = new MockHttpMessageHandler((req, ct) => {
 				Assert.That(req.Headers.Authorization.Scheme, Is.EqualTo(Protocol.BearerHttpAuthorizationScheme));
 				Assert.That(req.Headers.Authorization.Parameter, Is.EqualTo(bearerToken));
 				tcs.SetResult(expectedResponse);
