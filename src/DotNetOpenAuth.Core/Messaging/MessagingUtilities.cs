@@ -2026,7 +2026,7 @@ namespace DotNetOpenAuth.Messaging {
 		private static SymmetricAlgorithm CreateSymmetricAlgorithm(byte[] key) {
 			SymmetricAlgorithm result = null;
 			try {
-				result = SymmetricAlgorithm.Create();
+				result = Aes.Create();
 				result.Mode = CipherMode.CBC;
 				result.Key = key;
 				return result;
