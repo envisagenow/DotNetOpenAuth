@@ -440,19 +440,19 @@ namespace DotNetOpenAuth {
 				}
 
 				using (var response = webRequestHandler.GetResponse(request)) {
-					Logger.Library.Info("Statistical report submitted successfully.");
+						Logger.Library.Info("Statistical report submitted successfully.");
 
-					// The response stream may contain a message for the webmaster.
-					// Since as part of the report we submit the library version number,
-					// the report receiving service may have alerts such as:
-					// "You're using an obsolete version with exploitable security vulnerabilities."
+						// The response stream may contain a message for the webmaster.
+						// Since as part of the report we submit the library version number,
+						// the report receiving service may have alerts such as:
+						// "You're using an obsolete version with exploitable security vulnerabilities."
 					using (var responseReader = response.GetResponseReader()) {
 						string line = responseReader.ReadLine();
-						if (line != null) {
-							DemuxLogMessage(line);
+							if (line != null) {
+								DemuxLogMessage(line);
+							}
 						}
 					}
-				}
 
 				// Report submission was successful.  Reset all counters.
 				lock (events) {

@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MainWindow.xaml.cs" company="Outercurve Foundation">
-//     Copyright (c) Outercurve Foundation. All rights reserved.
+//   Copyright (c) Outercurve Foundation. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ namespace DotNetOpenAuth.OpenIdOfflineProvider {
 			TextWriterAppender boxLogger = log4net.LogManager.GetRepository().GetAppenders().OfType<TextWriterAppender>().FirstOrDefault(a => a.Name == "TextBoxAppender");
 			if (boxLogger != null) {
 				boxLogger.Writer = new TextBoxTextWriter(this.logBox);
-			}
+		}
 
 			this.startProvider();
 		}
@@ -131,20 +131,20 @@ namespace DotNetOpenAuth.OpenIdOfflineProvider {
 									authRequest.LocalIdentifier = authRequest.ClaimedIdentifier;
 								}
 								authRequest.IsAuthenticated = true;
-								break;
+						break;
 							case 1:
 								authRequest.IsAuthenticated = false;
-								break;
+						break;
 							case 2:
 								IntPtr oldForegroundWindow = NativeMethods.GetForegroundWindow();
 								bool stoleFocus = NativeMethods.SetForegroundWindow(this);
 								CheckIdWindow.ProcessAuthentication(this.hostedProvider, authRequest);
 								if (stoleFocus) {
 									NativeMethods.SetForegroundWindow(oldForegroundWindow);
-								}
+				}
 								break;
-						}
-					}
+			}
+		}
 				}
 			});
 
@@ -188,5 +188,5 @@ namespace DotNetOpenAuth.OpenIdOfflineProvider {
 		private void ClearLogButton_Click(object sender, RoutedEventArgs e) {
 			this.logBox.Clear();
 		}
-	}
+				}
 }

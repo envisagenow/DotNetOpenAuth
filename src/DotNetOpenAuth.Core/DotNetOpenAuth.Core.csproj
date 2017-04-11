@@ -179,7 +179,7 @@
     <EmbeddedResource Include="Messaging\MessagingStrings.sr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <!-- Since MVC 2 and higher apps tend to use type forwarding,

@@ -10,7 +10,6 @@ namespace DotNetOpenAuth {
 	using System.Globalization;
 	using DotNetOpenAuth.Loggers;
 	using DotNetOpenAuth.Messaging;
-	using log4net.Core;
 
 	/// <summary>
 	/// A general logger for the entire DotNetOpenAuth library.
